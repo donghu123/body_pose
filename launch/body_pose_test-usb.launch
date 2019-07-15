@@ -1,0 +1,14 @@
+<launch>
+    <node name="body_pose" pkg="body_pose" type="body_pose_node.py" output="screen">
+ 	<param name="process_width" value="200" />
+   	<param name="process_height" value="150" />
+    	<param name="conf_min_count" value="3" />
+    </node>
+    <node name="body_pose_tester" pkg="body_pose" type="body_pose_test_node.py" output="screen">
+        <remap from="~get_body_pose" to="/body_pose/get_body_pose" />
+        <remap from="~image" to="/usb_cam/image_raw" />
+    </node>
+    
+    <include file="$(find usb_cam)/launch/usb_cam-test.launch" />
+</launch>
+
